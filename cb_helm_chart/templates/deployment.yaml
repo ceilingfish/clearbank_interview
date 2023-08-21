@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  {{- include "mychart.labels" . }}
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      {{- include "mychart.labels" . | nindent 3  }}
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: dev_team
+                  operator: In
+                  values:
+                  - circle
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - nginx
+            topologyKey: kubernetes.io/hostname
+      containers:
+        - name: nginx
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+          volumeMounts:
+            - name: nginx-wwwroot-volume
+              mountPath: /usr/share/nginx/html #We'll mount this at the wwwroot so we can see the content
+      volumes:
+        - name: nginx-wwwroot-volume
+          configMap:
+            name: nginx-wwwroot

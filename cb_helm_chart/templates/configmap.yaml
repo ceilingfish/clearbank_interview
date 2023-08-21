@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-wwwroot
+  {{- include "mychart.labels" . }}
+data:
+  index.html: {{ .Values.product_text | quote }}

@@ -1,0 +1,16 @@
+
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: nginx-cpu-scaler
+  {{- include "mychart.labels" . }}
+spec:
+  scaleTargetRef:
+    name: nginx
+  minReplicaCount: 2
+  maxReplicaCount: 3
+  cooldownPeriod: 600
+  triggers:
+    - type: cpu
+      metadata:
+        value: "80"

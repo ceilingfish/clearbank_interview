@@ -1,0 +1,9 @@
+# Let's avoid recreating the labels code all over the place
+{{- define "mychart.labels" }}
+
+  labels:
+    app: nginx
+    {{- range $label, $value := .Values.labels }}
+    {{ $label }}: {{ $value | quote }}
+    {{- end }}
+{{- end }}

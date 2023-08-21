@@ -1,0 +1,10 @@
+replicaCount: 2
+image:
+  repository: nginx
+  tag: stable
+
+labels:
+  team: parrish
+  product: interview_question
+
+product_text: "This is an example text"
