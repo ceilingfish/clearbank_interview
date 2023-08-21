@@ -2,7 +2,7 @@
 
 There's quite a lot of depth here, so we're going to go over the high level moving parts, and how they fit together.
 
-![architecture diagram](Azure Ingress _ Egress Architecture.png)
+![architecture diagram](https://github.com/ceilingfish/clearbank_interview/blob/main/Azure%20Ingress%20_%20Egress%20Architecture.png?raw=true)
 
 ![](RackMultipart20230821-1-p11ur6_html_99202a3d0ae72e86.png)This is a link to the design on a fun tool called BrainBoard [https://app.brainboard.co/a/16051912-d0de-4b76-8cf3-ba9f94f961bc/design](https://app.brainboard.co/a/16051912-d0de-4b76-8cf3-ba9f94f961bc/design), which allows you to generate Terraform from diagrams.
 
